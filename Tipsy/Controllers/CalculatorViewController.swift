@@ -48,6 +48,7 @@ class CalculatorViewController: UIViewController {
     @IBAction func calculatePressed(_ sender: UIButton) {
         selectUserData()
         calculateBrain.calculateSplitScore()
+        self.performSegue(withIdentifier: "goToResults", sender: self)
     }
     
     func unselectTipButtons() {
@@ -61,5 +62,17 @@ class CalculatorViewController: UIViewController {
         
         calculateBrain.setSplitValue(persons: Int(splitNumberLabel.text ?? "2"))
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if ( segue.identifier == "goToResults"){
+            
+            let resultsVC = segue.destination as! ResultsViewController
+            resultsVC.totalScore = calculateBrain.getSplitedScore()
+            resultsVC.selectedTipOnPersent = calculateBrain.getSelectedPersentTip()
+            resultsVC.split = calculateBrain.getSplitValue()
+            
+        }
+    }
+    
 }
 

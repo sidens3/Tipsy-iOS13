@@ -34,6 +34,10 @@ struct CalculateBrain {
         billData.selectedTip = selectedTip ?? "0%"
     }
     
+    func getSelectedPersentTip() -> String? {
+        return billData.selectedTip
+    }
+    
     func getSplitValue() -> Int {
         return billData.splitValue ?? 2
     }
